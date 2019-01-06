@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class zavrushtaneVMinaloto {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		double nasledeniPari = scanner.nextDouble();
+		int godina = scanner.nextInt();
+
+		if (nasledeniPari < 1 || nasledeniPari > 1000000) {
+			System.out.println("Наследените пари трябва да бъдат в интервала от 1лв. до 1 000 000лв.");
+			scanner.close();
+			return;
+		} else if (godina >= 1900 || godina < 1801) {
+			System.out.println("Годината, в която Иванчо може да се върне трябва да е в периода между 1801 и 1900г.");
+			scanner.close();
+			return;
+		}
+
+		for (int i = 1800; i <= godina; i++) {
+			if (i % 2 == 0) {
+				nasledeniPari -= 12000;
+			} else {
+				nasledeniPari -= 12000 + ((i + 18 - 1800) * 50);
+			}
+		}
+
+		if (nasledeniPari >= 0) {
+			System.out.println("Yes! He will live a carefree life and will have " + String.format("%.2f", nasledeniPari)
+					+ " dollars left!");
+		} else {
+			System.out.println(
+					"No! He will need " + String.format("%.2f", Math.abs(nasledeniPari)) + " dollars to survive!");
+		}
+		scanner.close();
+	}
+}
